@@ -3,424 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عنوان الموقع</title>
+    <title>صفحة تسجيل الدخول والاشتراك</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; }
-        .menu-toggle {
-            position: fixed; 
-            top: 10px; 
-            left: 10px; 
-            cursor: pointer; 
-            z-index: 1000; 
-            background: #007BFF; 
-            padding: 10px; 
-            border-radius: 5px;
-            color: #fff;
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
             text-align: center;
-        }
-        .menu-toggle div {
-            width: 30px; 
-            height: 3px; 
-            background: #fff; 
-            margin: 6px 0; 
-            transition: 0.3s;
-        }
-        .sidebar {
-            width: 250px;
-            background: #007BFF;
-            color: #fff;
-            position: fixed;
-            top: 0;
-            left: -250px; 
-            height: 100%;
-            transition: 0.3s;
-            padding: 20px;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-        }
-        .sidebar.show {
-            left: 0;
-        }
-        .sidebar h2 {
+            background-color: #f9f9f9;
             margin: 0;
-            text-align: center;
-        }
-        .sidebar ul {
-            list-style: none;
             padding: 0;
-            margin: 0;
         }
-        .sidebar ul li {
-            padding: 10px 0;
-            border-bottom: 1px solid #0056b3;
-        }
-        .sidebar ul li a {
-            color: #fff;
-            text-decoration: none;
-        }
-        .main-content {
-            margin-left: 250px;
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
             padding: 20px;
-        }
-        .page { padding: 20px; }
-        .home-page { background: #f0f8ff; color: #333; }
-        .home-page h1 { margin: 0 0 20px 0; }
-        .home-page .section {
-            background: #fff;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 5px;
+            background-color: #fff;
+            border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .home-page .section h2 {
-            margin-top: 0;
+
+        .logo img {
+            width: 50px;
+            height: 50px;
         }
-        .referral-page { background: #fff; color: #333; }
-        .referral-page h1 { margin: 0 0 20px 0; }
-        .referral-page .referral-info {
-            background: #fff;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 20px;
+
+        .info h2 {
+            color: green;
         }
-        .referral-page .referral-info p {
-            margin: 0 0 10px;
-            line-height: 1.5;
+
+        .crypto-icons img {
+            width: 30px;
+            height: 30px;
+            margin: 5px;
         }
-        .withdrawal-page { background: #e8f5e9; color: #333; }
-        .withdrawal-page h1 { margin: 0 0 20px 0; }
-        .withdrawal-page .wallets {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+
+        .withdraw-options {
+            margin-top: 20px;
         }
-        .withdrawal-page .wallet {
-            flex: 1;
-            max-width: 200px;
-            border: 1px solid #007BFF;
-            border-radius: 5px;
-            padding: 10px;
-            text-align: center;
-            background: #fff;
+
+        .withdraw-options img {
+            width: 50px;
+            height: 50px;
         }
-        .withdrawal-page .wallet img {
-            max-width: 100%;
-            height: auto;
+
+        .payment-methods img {
+            width: 100px;
+            height: 50px;
+            margin: 5px;
         }
-        .ads-page { background: #fff3cd; color: #333; }
-        .ads-page h1 { margin: 0 0 20px 0; }
-        .ads-page .ad {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            background: #fff;
-            cursor: pointer;
-            transition: background 0.3s, cursor 0.3s;
+
+        .auth-container {
+            margin-top: 20px;
         }
-        .ads-page .ad:hover {
-            background: #f0f0f0;
-        }
-        .ads-page .ad.disabled {
-            background: #d3d3d3;
-            cursor: not-allowed;
-        }
-        .ads-page .ad.disabled:hover {
-            background: #d3d3d3;
-        }
-        .ads-page .ad button {
-            background: #007BFF;
-            color: #fff;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .ads-page .ad button:hover {
-            background: #0056b3;
-        }
-        .back-button {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background: #28a745; 
-            color: #fff;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            z-index: 1000;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-            display: none; 
-        }
-        .back-button:hover {
-            background: #218838;
-        }
-        .button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background: #007BFF;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-        .button:hover {
-            background: #0056b3;
-        }
-        .ad-popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #fff;
-            border: 1px solid #ccc;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            z-index: 1001;
-            max-width: 90%;
-            max-height: 80%;
-            overflow: auto;
-        }
-        .ad-popup .close {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #ff0000;
-            color: #fff;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .copy-button {
-            display: inline-block;
+
+        .auth-buttons button {
+            margin: 10px;
             padding: 10px 20px;
-            background: #007BFF;
-            color: #fff;
+            font-size: 16px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background 0.3s;
-            text-align: center;
         }
-        .copy-button:hover {
-            background: #0056b3;
+
+        #googleSignIn {
+            background-color: #4285F4;
+            color: white;
         }
-        .copy-message {
+
+        #signUpBtn {
+            background-color: #f0ad4e;
+            color: white;
+        }
+
+        #loginBtn {
+            background-color: #5bc0de;
+            color: white;
+        }
+
+        .hidden {
             display: none;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #28a745;
-            color: #fff;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-        }
-        @media screen and (max-width: 768px) {
-            .main-content {
-                margin-left: 0;
-                padding: 10px;
-            }
         }
     </style>
 </head>
 <body>
-    <div class="menu-toggle" onclick="toggleSidebar()">
-        <div></div>
-        <div></div>
-        <div></div>
-        <select id="languageSelect" onchange="changeLanguage(this.value)">
-            <option value="ar">العربية</option>
-            <option value="fr">Français</option>
-            <option value="en" selected>English</option>
-        </select>
-    </div>
-    <div class="sidebar" id="sidebar">
-        <h2 id="sidebarTitle">العنوان</h2>
-        <ul>
-            <li><a href="#" onclick="showPage('home')">الصفحة الرئيسية</a></li>
-            <li><a href="#" onclick="showPage('vipTasks')">مهام VIP</a></li>
-            <li><a href="#" onclick="showPage('referrals')">الإحالات</a></li>
-            <li><a href="#" onclick="showPage('ads')">الإعلانات</a></li>
-            <li><a href="#" onclick="showPage('withdrawal')">سحب الأموال</a></li>
-        </ul>
-    </div>
-    <div class="main-content">
-        <div id="home" class="page home-page">
-            <h1 id="homeTitle">مرحبا بكم في موقعنا</h1>
-            <div class="section">
-                <h2 id="section1Title">عن الموقع</h2>
-                <p id="section1Content">هذا هو المحتوى الخاص بالموقع...</p>
-            </div>
-            <div class="section">
-                <h2 id="section2Title">الميزات</h2>
-                <p id="section2Content">هنا ميزات الموقع...</p>
+    <div class="container">
+        <div class="logo">
+            <img src="path_to_logo.png" alt="Logo">
+            <h1>صفحة المعجبين يعلن</h1>
+        </div>
+        <div class="info">
+            <h2>صنبور في</h2>
+            <p>مدفوعات عالية - مدفوعات فورية - عملات متعددة</p>
+        </div>
+        <div class="crypto-icons">
+            <img src="path_to_icon.png" alt="Crypto Icon">
+            <img src="path_to_icon.png" alt="Crypto Icon">
+            <img src="path_to_icon.png" alt="Crypto Icon">
+            <!-- Add more icons as needed -->
+        </div>
+        <div class="withdraw-options">
+            <img src="path_to_direct_withdraw_icon.png" alt="Direct Withdraw">
+            <div class="payment-methods">
+                <img src="path_to_faucetpay.png" alt="FaucetPay">
+                <img src="path_to_cwallet.png" alt="Cwallet">
+                <img src="path_to_payeer.png" alt="PAYEER">
             </div>
         </div>
-        <div id="vipTasks" class="page" style="display:none;">
-            <h1 id="vipTitle">مهام VIP</h1>
-            <p id="vipContent">تفاصيل حول مهام VIP...</p>
-        </div>
-        <div id="referrals" class="page referral-page" style="display:none;">
-            <h1 id="referralTitle">الإحالات</h1>
-            <div class="referral-info">
-                <p>رابط الإحالة الخاص بك:</p>
-                <input type="text" id="referralLink" value="https://example.com/register?ref=yourReferralCode" readonly>
-                <button class="copy-button" onclick="copyReferralLink()">نسخ الرابط</button>
-                <div class="copy-message" id="copyMessage">تم النسخ!</div>
+        <div class="auth-container">
+            <button id="googleSignIn">تسجيل الدخول عبر جوجل</button>
+            <p>أو</p>
+            <div class="auth-buttons">
+                <button id="signUpBtn">يسجل</button>
+                <button id="loginBtn">تسجيل الدخول</button>
             </div>
         </div>
-        <div id="withdrawal" class="page withdrawal-page" style="display:none;">
-            <h1 id="withdrawalTitle">سحب الأموال</h1>
-            <div class="wallets">
-                <div class="wallet">
-                    <img src="wallet1.jpg" alt="محفظة 1">
-                    <p>محفظة 1</p>
-                </div>
-                <div class="wallet">
-                    <img src="wallet2.jpg" alt="محفظة 2">
-                    <p>محفظة 2</p>
-                </div>
-                <!-- أضف المزيد من المحفظات هنا -->
-            </div>
-        </div>
-        <div id="ads" class="page ads-page" style="display:none;">
-            <h1 id="adsTitle">الإعلانات</h1>
-            <div class="ad">
-                <p>إعلان 1</p>
-                <button onclick="showAdPopup('ad1')">عرض التفاصيل</button>
-            </div>
-            <div class="ad">
-                <p>إعلان 2</p>
-                <button onclick="showAdPopup('ad2')">عرض التفاصيل</button>
-            </div>
-            <!-- أضف المزيد من الإعلانات هنا -->
-        </div>
-    </div>
-    <div class="back-button" onclick="showPage('home')">العودة</div>
-    <div id="adPopup" class="ad-popup">
-        <button class="close" onclick="closeAdPopup()">إغلاق</button>
-        <div id="adContent"></div>
+        <form id="authForm" class="hidden">
+            <h2 id="formTitle">تسجيل الدخول</h2>
+            <label for="email">البريد الإلكتروني:</label>
+            <input type="email" id="email" required>
+            <label for="password">كلمة السر:</label>
+            <input type="password" id="password" required>
+            <button type="submit" id="submitBtn">دخول</button>
+        </form>
     </div>
     <script>
-        var translations = {
-            'ar': {
-                'sidebarTitle': 'العنوان',
-                'homeTitle': 'مرحبا بكم في موقعنا',
-                'section1Title': 'عن الموقع',
-                'section1Content': 'هذا هو المحتوى الخاص بالموقع...',
-                'section2Title': 'الميزات',
-                'section2Content': 'هنا ميزات الموقع...',
-                'vipTitle': 'مهام VIP',
-                'vipContent': 'تفاصيل حول مهام VIP...',
-                'referralTitle': 'الإحالات',
-                'withdrawalTitle': 'سحب الأموال',
-                'adsTitle': 'الإعلانات',
-                'copyMessage': 'تم النسخ!',
-                'backButton': 'العودة'
-            },
-            'fr': {
-                'sidebarTitle': 'Titre',
-                'homeTitle': 'Bienvenue sur notre site',
-                'section1Title': 'À propos du site',
-                'section1Content': 'Ceci est le contenu du site...',
-                'section2Title': 'Fonctionnalités',
-                'section2Content': 'Voici les fonctionnalités du site...',
-                'vipTitle': 'Tâches VIP',
-                'vipContent': 'Détails sur les tâches VIP...',
-                'referralTitle': 'Références',
-                'withdrawalTitle': 'Retrait d\'argent',
-                'adsTitle': 'Annonces',
-                'copyMessage': 'Copié!',
-                'backButton': 'Retour'
-            },
-            'en': {
-                'sidebarTitle': 'Title',
-                'homeTitle': 'Welcome to Our Site',
-                'section1Title': 'About the Site',
-                'section1Content': 'This is the site content...',
-                'section2Title': 'Features',
-                'section2Content': 'Here are the site features...',
-                'vipTitle': 'VIP Tasks',
-                'vipContent': 'Details about VIP tasks...',
-                'referralTitle': 'Referrals',
-                'withdrawalTitle': 'Withdrawal',
-                'adsTitle': 'Ads',
-                'copyMessage': 'Copied!',
-                'backButton': 'Back'
-            }
-        };
+        document.getElementById('signUpBtn').addEventListener('click', function() {
+            document.getElementById('authForm').classList.remove('hidden');
+            document.getElementById('formTitle').textContent = 'يسجل';
+            document.getElementById('submitBtn').textContent = 'يسجل';
+        });
 
-        function toggleSidebar() {
-            var sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('show');
-        }
-
-        function showPage(pageId) {
-            var pages = document.querySelectorAll('.page');
-            pages.forEach(function(page) {
-                page.style.display = 'none';
-            });
-            document.getElementById(pageId).style.display = 'block';
-
-            if (pageId === 'home') {
-                document.querySelector('.back-button').style.display = 'none';
-            } else {
-                document.querySelector('.back-button').style.display = 'block';
-            }
-
-            toggleSidebar();
-        }
-
-        function copyReferralLink() {
-            var copyText = document.getElementById('referralLink');
-            copyText.select();
-            copyText.setSelectionRange(0, 99999);
-            document.execCommand('copy');
-            document.getElementById('copyMessage').style.display = 'block';
-            setTimeout(function() {
-                document.getElementById('copyMessage').style.display = 'none';
-            }, 2000);
-        }
-
-        function showAdPopup(adId) {
-            var adContent = document.getElementById('adContent');
-            adContent.innerHTML = 'Details of Ad ' + adId;
-            document.getElementById('adPopup').style.display = 'block';
-        }
-
-        function closeAdPopup() {
-            document.getElementById('adPopup').style.display = 'none';
-        }
-
-        function changeLanguage(lang) {
-            var elements = {
-                'sidebarTitle': document.getElementById('sidebarTitle'),
-                'homeTitle': document.getElementById('homeTitle'),
-                'section1Title': document.getElementById('section1Title'),
-                'section1Content': document.getElementById('section1Content'),
-                'section2Title': document.getElementById('section2Title'),
-                'section2Content': document.getElementById('section2Content'),
-                'vipTitle': document.getElementById('vipTitle'),
-                'vipContent': document.getElementById('vipContent'),
-                'referralTitle': document.getElementById('referralTitle'),
-                'withdrawalTitle': document.getElementById('withdrawalTitle'),
-                'adsTitle': document.getElementById('adsTitle'),
-                'copyMessage': document.getElementById('copyMessage'),
-                'backButton': document.querySelector('.back-button')
-            };
-
-            Object.keys(elements).forEach(function(key) {
-                if (elements[key]) {
-                    elements[key].textContent = translations[lang][key];
-                }
-            });
-        }
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            document.getElementById('authForm').classList.remove('hidden');
+            document.getElementById('formTitle').textContent = 'تسجيل الدخول';
+            document.getElementById('submitBtn').textContent = 'دخول';
+        });
     </script>
 </body>
 </html>
